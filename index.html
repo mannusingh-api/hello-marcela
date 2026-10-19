@@ -232,6 +232,20 @@ html[data-sz=x] .gcs{grid-template-columns:1fr}
 .rc{display:flex;gap:8px;overflow-x:auto;padding:6px 2px 8px;margin:0 -2px}.rc button{flex:none;min-height:44px;padding:0 14px;border-radius:22px;border:1px solid var(--line);background:var(--card);font-weight:700;white-space:nowrap}.rc button small{font-weight:400;opacity:.8}.rc button.on{background:var(--teal);color:#fff;border-color:var(--teal)}
 .psec{display:flex;flex-direction:column;margin:16px 2px 2px}.psec b{font-size:1rem}.psec small{color:var(--mute);font-weight:600}
 .card.hd{border-left:4px solid var(--teal)}
+
+.opc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin:12px 0 6px}
+.orow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:4px 0}.orow+.orow{margin-top:8px}
+.olb{flex:none;width:5.6rem;font-weight:700;font-size:.88rem;line-height:1.2}.olb .ic{color:var(--teal);vertical-align:-3px}.olb small{display:block;font-weight:400;color:var(--mute);font-size:.74rem}
+.seg{flex:1;min-width:11rem;display:flex;gap:3px;background:var(--line);border-radius:14px;padding:3px}
+.sgb{flex:1;min-height:48px;border:0;border-radius:11px;background:transparent;color:var(--ink);font-weight:700;font-size:.9rem;line-height:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center}.sgb small{font-weight:400;font-size:.7rem;color:var(--mute)}
+.sgb.on{background:var(--teal);color:var(--onteal)}.sgb.on small{color:var(--onteal);opacity:.9}
+.pbar{position:sticky;bottom:10px;z-index:5;padding-top:12px;background:linear-gradient(rgba(0,0,0,0),var(--bg) 24%)}.pbar .btn{margin:0}
+
+:root{--tr:#6b4d9a;--trh:#6d3fd0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--tr:#b9a6e8;--trh:#c7b0ff}}
+:root[data-theme="dark"]{--tr:#b9a6e8;--trh:#c7b0ff}
+.card.wd .sub{color:var(--tr);font-weight:500;font-size:.95rem}
+.card.wd.hot .sub{color:var(--trh);font-weight:700;font-size:1rem}
 #upd{position:fixed;left:12px;right:12px;bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:50;max-width:496px;margin:0 auto;background:#1f1f1f;color:#fff;border-radius:16px;padding:12px;display:none;box-shadow:0 6px 16px rgba(0,0,0,.3)}
 #upd.on{display:block;animation:updin .28s ease-out}@keyframes updin{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){#upd.on{animation:none}}
@@ -547,12 +561,13 @@ function mmenu(){clearInterval(M.iv);S.mm=S.mm||"col";if(S.mt==null)S.mt=0;S.mn=
 var T=function(x,y,w,t,fl,tc){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="22" rx="6" fill="'+fl+'"/><text x="'+(x+w/2)+'" y="'+(y+15)+'" text-anchor="middle" font-size="10" font-weight="800" fill="'+tc+'">'+t+'</text>'};
 var pc='<svg viewBox="0 0 120 80" aria-hidden="true"><g stroke="#ffd23f" stroke-width="3.5" stroke-linecap="round"><line x1="50" y1="13" x2="70" y2="13"/><line x1="50" y1="40" x2="70" y2="67"/><line x1="50" y1="67" x2="70" y2="40"/></g>'+T(2,2,48,"Hello","#fff","#1d3a78")+T(70,2,48,"Hola","#fff","#1d3a78")+T(2,29,48,"Dog","#fff","#1d3a78")+T(70,29,48,"Gracias","#fff","#1d3a78")+T(2,56,48,"Thanks","#fff","#1d3a78")+T(70,56,48,"Perro","#fff","#1d3a78")+'</svg>';
 var R="#ff8a7a",Y="#ffd23f",G="#5fe0d5",pr='<svg viewBox="0 0 120 56" aria-hidden="true">'+T(0,2,36,"Cat",R,"#4a1810")+T(42,2,36,"Sun",Y,"#4a3a00")+T(84,2,36,"Milk",G,"#0a3d3a")+T(0,30,36,"Leche",G,"#0a3d3a")+T(42,30,36,"Gato",R,"#4a1810")+T(84,30,36,"Sol",Y,"#4a3a00")+'</svg>';
-focus(bkp('bk()')+'<h1>'+pf("purple","link",34)+' Match game / Une las parejas</h1><div class="sub">3 boards per round. / 3 tableros por ronda.</div><h2>Choose your game / Elige tu juego</h2><div class="gcs">'+
+var sg=function(t,es,on,f){return '<button class="sgb'+(on?' on':'')+'" aria-pressed="'+on+'" onclick="'+f+'">'+t+(es?'<small>'+es+'</small>':'')+'</button>'};
+focus(bkp('bk()')+'<h1>Match game / Une las parejas</h1><div class="sub">3 boards per round. / 3 tableros por ronda.</div><h2>Choose your game / Elige tu juego</h2><div class="gcs">'+
 gcard(S.mm==="col","c1","S.mm='col';save();mmenu()","Easy / Fácil",pc,"Columns","Columnas","Tap a word, then its match","Toca una palabra y su pareja")+
 gcard(S.mm==="rb","c2","S.mm='rb';save();mmenu()","Challenge / Reto",pr,"Rainbow","Arcoíris","Find the pairs in the grid","Encuentra las parejas")+'</div>'+
-'<div class="gsoon">'+ic("plus",18)+' More games coming soon / Más juegos pronto</div>'+
-'<h2>Timer / Tiempo</h2>'+mopt("Relaxed","No timer / Sin tiempo",!S.mt,"S.mt=0;save();mmenu()")+mopt("Timed","Round timer / Con reloj",!!S.mt,"S.mt=1;save();mmenu()")+
-'<h2>Pairs per board / Parejas</h2><div class="r" style="gap:8px">'+[5,6,8].map(function(n){return '<button class="bt'+(S.mn===n?' ok':'')+'" onclick="S.mn='+n+';save();mmenu()">'+n+'</button>'}).join('')+'</div><button class="btn" onclick="mstart()">Play / Jugar ▶</button>')}
+'<div class="opc"><div class="orow"><div class="olb">'+ic("clock",18)+' Timer<small>Tiempo</small></div><div class="seg">'+sg("Relaxed","Sin tiempo",!S.mt,"S.mt=0;save();mmenu()")+sg("Timed","Con reloj",!!S.mt,"S.mt=1;save();mmenu()")+'</div></div>'+
+'<div class="orow"><div class="olb">'+ic("link",18)+' Pairs<small>Parejas</small></div><div class="seg">'+[5,6,8].map(function(n){return sg(String(n),"",S.mn===n,"S.mn="+n+";save();mmenu()")}).join('')+'</div></div></div>'+
+'<div class="pbar"><button class="btn" onclick="mstart()">Play / Jugar ▶</button></div>')}
 function lw12(t){return t.split(" ").every(function(w){return w.length<=12})}
 function mpick(){var lim=M.mode==="rb"?14:24,pool=BANK.filter(function(it){return it[0].length<=lim&&it[1].length<=lim&&it[0].split(" ").length<=3&&!/[.?!]$/.test(it[0])&&(M.mode!=="rb"||(lw12(it[0])&&lw12(it[1])))}),fresh=pool.filter(function(it){return !M.used[it[2]]});if(fresh.length>=M.n*3)pool=fresh;
 var d=sh(due().map(function(k){return BANKK[k]}).filter(function(it){return it&&pool.indexOf(it)>=0})).slice(0,2),se={},ss={},out=[];
@@ -670,7 +685,7 @@ focus('<button class="x" onclick="me()" aria-label="Close">✕</button><div clas
 function shareSend(){var d={title:"Hello Marcela",text:shText(),url:SHARE_URL};try{if(navigator.share){navigator.share(d).catch(function(e){if(e&&e.name==="AbortError")return;shareCopy()});return}}catch(e){}shareCopy()}
 function shareCopy(){var t=shText()+"\n"+SHARE_URL,ok=function(){tst("Link copied<br><small>Enlace copiado</small>")},fb=function(){try{var a=document.createElement("textarea");a.value=t;a.setAttribute("readonly","");a.style.cssText="position:fixed;opacity:0;top:0";document.body.appendChild(a);a.select();var r=document.execCommand("copy");document.body.removeChild(a);if(r)ok();else tst("Copy the link below<br><small>Copia el enlace de abajo</small>")}catch(e){tst("Copy the link below<br><small>Copia el enlace de abajo</small>")}};try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok).catch(fb);return}}catch(e){}fb()}
 wr("tour","tour");wr("shareScr","me2");
-var APP_VER="1.4.0",SWR=null;
+var APP_VER="1.4.1",SWR=null;
 function updMsg(t){var b=document.getElementById("ver");if(b)b.textContent=t}
 function showUpd(){var u=document.getElementById("upd");if(u)u.classList.add("on")}
 function doUpd(){var g=document.getElementById("ug");if(g)g.textContent="Updating… / Actualizando…";if(SWR&&SWR.waiting)SWR.waiting.postMessage("skip");else setTimeout(function(){location.reload()},400)}
